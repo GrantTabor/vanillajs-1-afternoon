@@ -1,22 +1,23 @@
 let gameArr = [];
 let player = document.getElementById("player").innerHTML;
-
+let gameOver = false;
 
 function play(clickedID){
-    gameArr[clickedID] = player;
-    document.getElementById(clickedID).innerText = player;
+    if(gameArr[clickedID] == undefined && gameOver == false){
+        gameArr[clickedID] = player;
+        document.getElementById(clickedID).innerText = player;
+        
+        checkTicTacToe(gameArr);
 
-    if (player === "X"){
-        player = "O";
-        document.getElementById("player").innerHTML = player;
-    }
-    else{
-        player = "X";
-        document.getElementById("player").innerHTML = player;
-    }
-    
-    
-    checkTicTacToe(gameArr);
+        if (player === "X"){
+            player = "O";
+            document.getElementById("player").innerHTML = player;
+        }
+        else{
+            player = "X";
+            document.getElementById("player").innerHTML = player;
+        }
+}
 }
 
 function checkTicTacToe(gameArr){
@@ -38,31 +39,40 @@ function checkTicTacToe(gameArr){
         }
     } //am I crazy or is this too many else ifs?
     if (topLeft !== undefined && topLeft == topMiddle && topLeft == topRight){
-        window.alert("winner");
+        alert(`${player} is the winner`);
+        gameOver = true;
     }
     else if (middleLeft !== undefined && middleLeft == middleMiddle && middleLeft == middleRight){
-        window.alert("winner");
+        alert(`${player} is the winner`);
+        gameOver = true;
     }
     else if (bottomLeft !== undefined && bottomLeft == bottomMiddle && bottomLeft == bottomRight){
-        window.alert("winner");
+        alert(`${player} is the winner`);
+        gameOver = true;
     }
     else if (topLeft !== undefined && topLeft == middleMiddle && topLeft == bottomRight){
-        window.alert("winner");
+        alert(`${player} is the winner`);
+        gameOver = true;
     }
     else if (bottomLeft !== undefined && bottomLeft == middleMiddle && bottomLeft == topRight){
-        window.alert("winner");
+        alert(`${player} is the winner`);
+        gameOver = true;
     }
     else if (topLeft !== undefined && topLeft == middleLeft && topLeft == bottomLeft){
-        window.alert("winner");
+        alert(`${player} is the winner`);
+        gameOver = true;
     }
     else if (topMiddle !== undefined && topMiddle == middleMiddle && topMiddle == bottomMiddle){
-        window.alert("winner");
+        alert(`${player} is the winner`);
+        gameOver = true;
     }
     else if (topRight !== undefined && topRight == middleRight && topRight == bottomRight){
-        window.alert("winner");
+        alert(`${player} is the winner`);
+        gameOver = true;
     }
     else if (boardFull == true){
-        window.alert("CATS");
+        window.alert("CATS! No one wins!");
+        gameOver = true;
     }
 
 }
@@ -72,6 +82,7 @@ function reset(){
         gameArr[i] = undefined;
         document.getElementById(i).innerText = '';
     }
+    player = "X";
     document.getElementById("player").innerHTML = "X";
-
+    gameOver = false;
 }
